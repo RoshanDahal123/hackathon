@@ -1,33 +1,18 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function App() {
   const [data, setData] = useState([]);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/get');
+      const response = await axios.get("http://localhost:5000/api/get");
+      console.log(response);
       setData(response.data);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
     }
   };
-  // let postedData = ['iii', 'jjj', 'kkk', 'lll'];
-
-  // const postData = async () => {
-  //   try {
-  //     const response = await axios.post(
-  //       'http://localhost:5000/api/post',
-  //       postedData
-  //     );
-
-  //     console.log(response.data);
-  //     // After posting data, refetch to update the table
-  //     fetchData();
-  //   } catch (error) {
-  //     console.error('Error adding data:', error.message);
-  //   }
-  // };
 
   useEffect(() => {
     const fetchDataInterval = setInterval(() => {
@@ -41,20 +26,18 @@ function App() {
     <>
       <div>
         <h2>Data:</h2>
-        <table className='table table-bordered table-striped'>
+        <table className="table table-bordered table-striped">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Data 1</th>
-              <th>Data 2</th>
-              <th>Data 3</th>
-              <th>Data 4</th>
+              <th>Smoke Value</th>
+              <th>Air Quality</th>
+              <th>Temperature(C/F)</th>
+              <th>Humidity</th>
             </tr>
           </thead>
           <tbody>
             {data.map((row, index) => (
               <tr key={index}>
-                <td>{index + 1}</td>
                 {row.map((value, colIndex) => (
                   <td key={colIndex}>{value}</td>
                 ))}
